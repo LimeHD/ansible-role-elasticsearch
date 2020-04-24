@@ -15,7 +15,7 @@
 
 - name: set fact users_to_remove
   set_fact: users_to_remove={{ current_file_users.stdout_lines | difference (es_users.file.keys() | list) }}
-  when: manage_file_users and es_delete_unmanaged_file
+  when: manage_file_users
 
 #Remove users
 - name: Remove Users
@@ -31,7 +31,7 @@
 
 - name: set fact users_to_add
   set_fact: users_to_add={{ es_users.file.keys() | list | difference (current_file_users.stdout_lines) }}
-  when: manage_file_users and es_delete_unmanaged_file
+  when: manage_file_users
 
 #Add users
 - name: Add Users
@@ -88,4 +88,3 @@
     mode: "0660"
     force: yes
   when: manage_file_users and users_roles | length > 0
-

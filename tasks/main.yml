@@ -37,3 +37,5 @@
     port: "{{ elasticsearch_http_port }}"
     delay: 3
     timeout: 300
+
+- include_tasks: users.yml
